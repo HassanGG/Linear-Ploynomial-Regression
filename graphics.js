@@ -13,7 +13,7 @@ function drawPoints() {
         // multiply by width/height because it is normalized
         let x = points[i].x * width;
         let y = points[i].y * height;
-        circle(points[i].x, points[i].y, diameter);
+        circle(x, y, diameter);
     }
 }
 
@@ -28,7 +28,6 @@ function setup() {
 function draw() {
     background(27, 31, 38);
     drawPoints();
-    
 }
 
 // changes the canvas size on window resize
@@ -40,6 +39,11 @@ function windowResized() {
 function mouseClicked() {
     // normalize point
     let x = map(mouseX, 0, width, 0, 1);
-    let y = map(mouseY, 0, height, 1, 0);
-    pushPoint(mouseX, mouseY);
+    let y = map(mouseY, 0, height, 0, 1);
+    pushPoint(x, y);
+    console.log(points);
+}
+
+function plotLine(x, y) {
+
 }
