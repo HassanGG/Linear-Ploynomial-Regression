@@ -23,8 +23,10 @@ const learningRate = 0.02;
 const optimizer = tf.train.sgd(learningRate);
 
 function loss(predictions, trueValues) {
-    const error = predictions.sub(trueValues).square().mean();
-    return error;
+    return tf.tidy(() => {
+        const error = predictions.sub(trueValues).square().mean();
+        return error;
+    });
 }
 
 function train() {
@@ -49,6 +51,5 @@ function runNetwork() {
         getData();
         train();
         pushFit(getScalarValue(m), getScalarValue(b));
-        console.log(fit);
     });
 }

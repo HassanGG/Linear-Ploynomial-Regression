@@ -5,6 +5,7 @@ const diameter = 8;
 // adds a point on the screen
 function pushPoint(X, Y) {
     points.push({ x: X, y: Y });
+    console.log(tf.memory());
 }
 
 // draws all the points
