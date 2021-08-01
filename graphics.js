@@ -5,6 +5,7 @@ const diameter = 8;
 // adds a point on the screen
 function pushPoint(X, Y) {
     points.push({ x: X, y: Y });
+    runNetwork();
 }
 
 // draws all the points
@@ -24,7 +25,6 @@ function setup() {
     var cnv = createCanvas(windowWidth, windowHeight);
     cnv.style('display', 'block');
     background(27, 31, 38);
-    pushFit(1, 0.1);
 }
 
 // draws everything
@@ -45,14 +45,12 @@ function mouseClicked() {
     let x = map(mouseX, 0, width, 0, 1);
     let y = map(mouseY, 0, height, 0, 1);
     pushPoint(x, y);
-    console.log(points);
 }
 
 // takes in numbers between 1 and 0 and plots it on canvas
 function pushFit(m, b) {
     fit.y1 = (m * fit.x1) + b;
     fit.y2 = (m * fit.x2) + b;
-    console.log(fit);
 }
 
 function drawFit() {
