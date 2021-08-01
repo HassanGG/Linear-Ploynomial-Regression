@@ -5,7 +5,6 @@ const diameter = 8;
 // adds a point on the screen
 function pushPoint(X, Y) {
     points.push({ x: X, y: Y });
-    runNetwork();
 }
 
 // draws all the points
@@ -32,6 +31,9 @@ function draw() {
     background(27, 31, 38);
     drawPoints();
     drawFit();
+    if(points.length > 0) {
+        runNetwork();
+    }
 }
 
 // changes the canvas size on window resize
@@ -58,8 +60,10 @@ function drawFit() {
     strokeWeight(3);
     // height - x because y = 0, is at the top instead of bottom.
     let x1 = fit.x1 * width;
-    let y1 = height - (fit.y1 * height);
+    // let y1 = height - (fit.y1 * height);
+    let y1 = (fit.y1 * height);
     let x2 = fit.x2 * width;
-    let y2 = height - (fit.y2 * height);
+    let y2 = (fit.y2 * height);
+    // let y2 = height - (fit.y2 * height);
     line(x1, y1, x2, y2);
 }
