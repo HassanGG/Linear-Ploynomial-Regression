@@ -11,12 +11,14 @@ function getScalarValue(tensor) {
 // takes a value x and predicts its y value using m and b
 function predict(x) {
     return tf.tidy(() => {
-        return m.mul(x).add(b);
+        return a.mul(x).mul(x).mul(x).add(b.mul(x).mul(x)).add(c.mul(x)).add(d);
     });
 }
 
-const m = tf.variable(tf.scalar(getRandom(-1, 1), dtype=tf.float32));
-const b = tf.variable(tf.scalar(getRandom(0, 1), dtype=tf.float32));
+const a = tf.variable(tf.scalar(getRandom(-1, 1), dtype=tf.float32));
+const b = tf.variable(tf.scalar(getRandom(-1, 1), dtype=tf.float32));
+const c = tf.variable(tf.scalar(getRandom(-1, 1), dtype=tf.float32));
+const d = tf.variable(tf.scalar(getRandom(0, 1), dtype=tf.float32));
 let inputs = [];
 let trueValues = [];
 const learningRate = 0.5;
@@ -50,6 +52,7 @@ function runNetwork() {
     tf.tidy(() => {
         getData();
         train();
-        pushFit(getScalarValue(m), getScalarValue(b));
+        pushCurve(getScalarValue(a), getScalarValue(b), getScalarValue(c), getScalarValue(d));
+        a.print();
     });
 }

@@ -1,6 +1,6 @@
 const points = [];
 const fit = { x1: 0, y1: 0, x2: 1, y2: 0 };
-const cubic = [];
+let cubic = [];
 const pointDiameter = 8;
 const introLocation = {x: 0.4, y: 0.5};
 const introSize = 33;
@@ -27,7 +27,7 @@ function setup() {
     var cnv = createCanvas(windowWidth, windowHeight);
     cnv.style('display', 'block');
     background(27, 31, 38);
-    pushCurve(1, 2, -1, 0);
+    // pushCurve(1, 2, -1, 0);
 }
 
 // draws everything
@@ -36,11 +36,10 @@ function draw() {
     drawPoints();
     if(points.length > 0) {
         runNetwork();
-        drawFit();
+        drawCurve();
     } else {
         drawIntro();
     }
-    drawCurve();
     
 }
 
@@ -74,8 +73,11 @@ function pushFit(m, b) {
 function solvePolynomial(x, a, b, c, d) {
     return (a * Math.pow(x, 3)) + (b * x * x) + (c * x) + d;
 }
+
 function pushCurve(a, b, c, d) {
     let xs = [0, 0.33, 0.66, 1];
+
+    cubic = [];
 
     cubic.push({x: xs[0], y: solvePolynomial(xs[0], a, b, c, d)});
     cubic.push({x: xs[1], y: solvePolynomial(xs[1], a, b, c, d)});
@@ -94,7 +96,7 @@ function drawCurve() {
         coords.push(cubic[i].y * height);
     }
 
-    bezier(coords[0], coords[1], coords[2], coords[3], coords[4], coords[5], coords[6], coords[7], coords[8]);
+    bezier(coords[0], coords[1], coords[2], coords[3], coords[4], coords[5], coords[6], coords[7]);
 }
 
 function drawFit() {
