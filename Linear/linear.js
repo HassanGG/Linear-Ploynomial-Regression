@@ -19,7 +19,7 @@ const m = tf.variable(tf.scalar(getRandom(-1, 1), dtype=tf.float32));
 const b = tf.variable(tf.scalar(getRandom(0, 1), dtype=tf.float32));
 let inputs = [];
 let trueValues = [];
-const learningRate = 0.05;
+const learningRate = 0.5;
 const optimizer = tf.train.sgd(learningRate);
 
 function loss(predictions, trueValues) {
