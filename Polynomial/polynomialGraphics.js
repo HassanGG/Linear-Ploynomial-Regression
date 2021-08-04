@@ -1,6 +1,6 @@
 const points = [];
 const fit = { x1: 0, y1: 0, x2: 1, y2: 0 };
-let cubic = [];
+let curveP = [];
 const pointDiameter = 8;
 const introLocation = {x: 0.4, y: 0.5};
 const introSize = 33;
@@ -70,33 +70,31 @@ function pushFit(m, b) {
     fit.y2 = (m * fit.x2) + b;
 }
 
-function solvePolynomial(x, a, b, c, d) {
-    return (a * Math.pow(x, 3)) + (b * x * x) + (c * x) + d;
-}
+function pushCurve(a, b, c) {
+    let xs = [];
+    let ys = [];
+    for(let x = 0; x < 1; x+=0.25) {
+        xs.push(x);
+        ys.push((a * Math.pow(x, 2)) + (b * x) + c);
+    }
 
-function pushCurve(a, b, c, d) {
-    let xs = [0, 0.33, 0.66, 1];
+    for(let i = 0; i < xs.length; i++) {
+        curveP.push({x: xs[i], y: ys[i]});
+    }
 
-    cubic = [];
-
-    cubic.push({x: xs[0], y: solvePolynomial(xs[0], a, b, c, d)});
-    cubic.push({x: xs[1], y: solvePolynomial(xs[1], a, b, c, d)});
-    cubic.push({x: xs[2], y: solvePolynomial(xs[2], a, b, c, d)});
-    cubic.push({x: xs[3], y: solvePolynomial(xs[3], a, b, c, d)});
 }
 
 function drawCurve() {
+    beginShape();
     noFill();
-    stroke(235, 61, 52);
+    stroke(255);
     strokeWeight(3);
 
-    let coords = [];
-    for(let i = 0; i < cubic.length; i++) {
-        coords.push(cubic[i].x * width);
-        coords.push(cubic[i].y * height);
+    for(let i = 0; i < curveP.length; i++) {
+        vertex(curveP[i].x * width, curveP[i].y * height);
     }
 
-    bezier(coords[0], coords[1], coords[2], coords[3], coords[4], coords[5], coords[6], coords[7]);
+    endShape();
 }
 
 function drawFit() {

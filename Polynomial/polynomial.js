@@ -1,3 +1,11 @@
+const a = tf.variable(tf.scalar(getRandom(-1, 1), dtype=tf.float32));
+const b = tf.variable(tf.scalar(getRandom(-1, 1), dtype=tf.float32));
+const c = tf.variable(tf.scalar(getRandom(-1, 1), dtype=tf.float32));
+let inputs = [];
+let trueValues = [];
+const learningRate = 0.5;
+const optimizer = tf.train.sgd(learningRate);
+
 // data is contained within points[].
 function getRandom(max, min) {
     return Math.random() * (max - min) + min;
@@ -11,18 +19,10 @@ function getScalarValue(tensor) {
 // takes a value x and predicts its y value using m and b
 function predict(x) {
     return tf.tidy(() => {
-        return a.mul(x).mul(x).mul(x).add(b.mul(x).mul(x)).add(c.mul(x)).add(d);
+        return x.square().mul(a).add(x.mul(b)).add(c);
     });
 }
 
-const a = tf.variable(tf.scalar(getRandom(-1, 1), dtype=tf.float32));
-const b = tf.variable(tf.scalar(getRandom(-1, 1), dtype=tf.float32));
-const c = tf.variable(tf.scalar(getRandom(-1, 1), dtype=tf.float32));
-const d = tf.variable(tf.scalar(getRandom(0, 1), dtype=tf.float32));
-let inputs = [];
-let trueValues = [];
-const learningRate = 0.5;
-const optimizer = tf.train.sgd(learningRate);
 
 function loss(predictions, trueValues) {
     return tf.tidy(() => {
@@ -52,7 +52,7 @@ function runNetwork() {
     tf.tidy(() => {
         getData();
         train();
-        pushCurve(getScalarValue(a), getScalarValue(b), getScalarValue(c), getScalarValue(d));
+        pushCurve(getScalarValue(a), getScalarValue(b), getScalarValue(c));
         a.print();
     });
 }
