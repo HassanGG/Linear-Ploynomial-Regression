@@ -73,7 +73,8 @@ function pushFit(m, b) {
 function pushCurve(a, b, c) {
     let xs = [];
     let ys = [];
-    for(let x = 0; x < 1; x+=0.25) {
+    curveP = [];
+    for(let x = 0; x < 1; x+=0.025) {
         xs.push(x);
         ys.push((a * Math.pow(x, 2)) + (b * x) + c);
     }
