@@ -8,6 +8,6 @@ Choose Linear/Ploynomial by clicking on their respective html files.
 
 ## About the Networks
 I used mean squared error for the loss function.
-I used stochastic gradient descent for the optimizer.
+I used stochastic gradient descent/momentum for the optimizer.
 
 

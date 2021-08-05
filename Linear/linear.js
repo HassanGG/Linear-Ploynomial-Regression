@@ -1,3 +1,10 @@
+const m = tf.variable(tf.scalar(getRandom(-1, 1), dtype=tf.float32));
+const b = tf.variable(tf.scalar(getRandom(0, 1), dtype=tf.float32));
+let inputs = [];
+let trueValues = [];
+const learningRate = 0.5;
+const optimizer = tf.train.sgd(learningRate);
+
 // data is contained within points[].
 function getRandom(max, min) {
     return Math.random() * (max - min) + min;
@@ -15,13 +22,7 @@ function predict(x) {
     });
 }
 
-const m = tf.variable(tf.scalar(getRandom(-1, 1), dtype=tf.float32));
-const b = tf.variable(tf.scalar(getRandom(0, 1), dtype=tf.float32));
-let inputs = [];
-let trueValues = [];
-const learningRate = 0.5;
-const optimizer = tf.train.sgd(learningRate);
-
+// uses mean squared loss function
 function loss(predictions, trueValues) {
     return tf.tidy(() => {
         const error = predictions.sub(trueValues).square().mean();

@@ -1,5 +1,4 @@
 const points = [];
-const fit = { x1: 0, y1: 0, x2: 1, y2: 0 };
 let curveP = [];
 const pointDiameter = 8;
 const introLocation = {x: 0.4, y: 0.5};
@@ -64,11 +63,6 @@ function mouseClicked() {
     pushPoint(x, y);
 }
 
-// takes in numbers between 1 and 0 and plots it on canvas
-function pushFit(m, b) {
-    fit.y1 = (m * fit.x1) + b;
-    fit.y2 = (m * fit.x2) + b;
-}
 
 function pushCurve(a, b, c) {
     let xs = [];
@@ -88,7 +82,7 @@ function pushCurve(a, b, c) {
 function drawCurve() {
     beginShape();
     noFill();
-    stroke(255);
+    stroke(235, 61, 52);
     strokeWeight(3);
 
     for(let i = 0; i < curveP.length; i++) {
@@ -96,17 +90,4 @@ function drawCurve() {
     }
 
     endShape();
-}
-
-function drawFit() {
-    stroke(235, 61, 52);
-    strokeWeight(3);
-    // height - x because y = 0, is at the top instead of bottom.
-    let x1 = fit.x1 * width;
-    // let y1 = height - (fit.y1 * height);
-    let y1 = (fit.y1 * height);
-    let x2 = fit.x2 * width;
-    let y2 = (fit.y2 * height);
-    // let y2 = height - (fit.y2 * height);
-    line(x1, y1, x2, y2);
 }
