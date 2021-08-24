@@ -10,4 +10,11 @@ Choose Linear/Ploynomial by clicking on their respective html files.
 I used mean squared error for the loss function.
 I used stochastic gradient descent/momentum for the optimizer.
 
+---
+## Linear Regression Showcase:
+![linear regression](./linear_showcase.png)
+![linear regression 2](./linear_showcase_2.png)
 
+## Polynomial Regression Showcase:
+![Polynomial regression](./polynomial_showcase.png)
+![Polynomial regression 2](./polynomial_showcase_2.png)
